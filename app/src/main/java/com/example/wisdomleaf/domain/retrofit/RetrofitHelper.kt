@@ -6,5 +6,5 @@ import com.example.wisdomleaf.domain.datastate.DataState
 import kotlinx.coroutines.flow.Flow
 
 interface RetrofitHelper {
-    suspend fun getBooksList(): Flow<DataState<BookListNetworkResponse>>
+    suspend fun getBooksList(): Flow<DataState<List<BookListNetworkResponseItem>>>
 }

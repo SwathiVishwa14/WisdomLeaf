@@ -13,7 +13,7 @@ class AppRepository constructor(
         coinListDataSource.getBookList().collect {
             when (it) {
                 is DataState.Success -> {
-                    emit(DataState.Success(it.data.data))
+                    emit(DataState.Success(it.data))
                 }
                 is DataState.Loading -> {
                     emit(DataState.Loading(false))

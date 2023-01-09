@@ -15,7 +15,7 @@ class DataSourceImpl constructor(
     private val bookListResponseMapper: BookListResponseMapper
 ) :
     DataSource {
-    override suspend fun getBookList(): Flow<DataState<BookListResponse>> = flow {
+    override suspend fun getBookList(): Flow<DataState<List<BookListResponseItem>>> = flow {
         retrofitInterface.getBooksList().collect {
             when (it) {
                 is DataState.Success -> {

@@ -28,10 +28,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-      /*  binding.pullToRefresh.setOnRefreshListener {
-            coinListViewModel.getCoinList() // your code
-            binding.pullToRefresh.isRefreshing = false
-        }*/
+        binding.pullToRefresh.apply {
+            setOnRefreshListener {
+                bookListViewModel.getBooksList()
+                isRefreshing = false
+            }
+        }
 
         bookListViewModel.getBooksList()
         Log.d("Doodlelue", "Initial")

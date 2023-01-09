@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.flow
 
 class RetrofitHelperImpl constructor(private val apiInterface: WebService) :
     RetrofitHelper {
-    override suspend fun getBooksList(): Flow<DataState<BookListNetworkResponse>> = flow {
+    override suspend fun getBooksList(): Flow<DataState<List<BookListNetworkResponseItem>>> = flow {
         try {
             emit(DataState.Loading(true))
             delay(2000)

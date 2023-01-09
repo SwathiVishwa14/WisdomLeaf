@@ -8,9 +8,9 @@ import com.example.wisdomleaf.utils.EntityMapper
 import javax.inject.Inject
 
 class BookListResponseMapper @Inject constructor() :
-    EntityMapper<BookListNetworkResponse, BookListResponse> {
+    EntityMapper<List<BookListNetworkResponseItem>, List<BookListResponseItem>> {
 
-    override fun mapFromEntity(entity: BookListNetworkResponse): BookListResponse {
+  /*  override fun mapFromEntity(entity: BookListNetworkResponse): BookListResponse {
         return BookListResponse(data = entity.data.map { mapToData(it) })
     }
 
@@ -23,9 +23,27 @@ class BookListResponseMapper @Inject constructor() :
             url = entity.url,
             download_url = entity.downloadUrl
         )
+    }*/
+
+ /*   override fun mapToEntity(domainModel: BookListResponse): BookListNetworkResponse {
+        TODO("Not yet implemented")
+    }*/
+
+    override fun mapFromEntity(entity: List<BookListNetworkResponseItem>): List<BookListResponseItem> {
+       return entity.map { mapToData(it) }
+    }
+    fun mapToData(entity: BookListNetworkResponseItem): BookListResponseItem {
+        return BookListResponseItem(
+            id = entity.id,
+            author = entity.author,
+            width = entity.width,
+            height = entity.height,
+            url = entity.url,
+            download_url = entity.downloadUrl
+        )
     }
 
-    override fun mapToEntity(domainModel: BookListResponse): BookListNetworkResponse {
+    override fun mapToEntity(domainModel: List<BookListResponseItem>): List<BookListNetworkResponseItem> {
         TODO("Not yet implemented")
     }
 }
