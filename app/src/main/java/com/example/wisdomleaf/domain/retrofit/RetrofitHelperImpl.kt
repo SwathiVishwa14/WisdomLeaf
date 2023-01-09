@@ -1,7 +1,6 @@
 package com.example.wisdomleaf.domain.retrofit
 
 import android.util.Log
-import com.example.wisdomleaf.data.model.BookListNetworkResponse
 import com.example.wisdomleaf.data.model.BookListNetworkResponseItem
 import com.example.wisdomleaf.domain.WebService
 import com.example.wisdomleaf.domain.datastate.DataState

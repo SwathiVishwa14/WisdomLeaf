@@ -1,6 +1,5 @@
 package com.example.wisdomleaf.domain
 
-import com.example.wisdomleaf.data.model.BookListNetworkResponse
 import com.example.wisdomleaf.data.model.BookListNetworkResponseItem
 import retrofit2.Response
 import retrofit2.http.GET

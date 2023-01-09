@@ -13,19 +13,18 @@ import com.google.android.material.textview.MaterialTextView
 
 class BookListAdapter(
     val list: List<BookListResponseItem>,
-    val requireContext: Context
+    private val requireContext: Context
 ) :
-    RecyclerView.Adapter<CoinsViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinsViewHolder {
+    RecyclerView.Adapter<BooksViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BooksViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.book_list_layout, parent, false)
-        return CoinsViewHolder(view)
+        return BooksViewHolder(view)
 
     }
 
-    override fun onBindViewHolder(holder: CoinsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BooksViewHolder, position: Int) {
         val data = list[position]
-        val scale = Math.pow(10.0, 2.0)
 
         holder.name.text = data.author
         holder.id.text = data.id
@@ -39,7 +38,7 @@ class BookListAdapter(
     }
 }
 
-class CoinsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class BooksViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val name: MaterialTextView = view.findViewById(R.id.author_name_tv)
     val id: MaterialTextView = view.findViewById(R.id.id_tv)
     val image: ImageView = view.findViewById(R.id.author_img)

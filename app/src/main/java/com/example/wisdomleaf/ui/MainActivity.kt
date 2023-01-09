@@ -1,6 +1,5 @@
 package com.example.wisdomleaf.ui
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -20,7 +19,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val bookListViewModel: MainViewModel by viewModels()
-    private var logMsg: String = "Doodlelue"
+    private var logMsg: String = "BooksList"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         bookListViewModel.getBooksList()
-        Log.d("Doodlelue", "Initial")
+        Log.d(logMsg, "Initial")
         subscribeObserver()
     }
 
@@ -44,16 +43,13 @@ class MainActivity : AppCompatActivity() {
         bookListViewModel.booksListData.observe(this) { dataState ->
             when (dataState) {
                 is DataState.Error -> {
-                    Log.d(logMsg, "Observe")
-                    Log.e("GetCoin List::", "Error : ${dataState.e}")
-//                    context?.toast("error")
+                    Log.e("GetBook List::", "Error : ${dataState.e}")
                 }
                 is DataState.Loading -> {
-//                    Log.e("SELL_OFFER_LIST::", "UI List size: ${dataState.loading}")
+
                 }
                 is DataState.Success -> {
-                    Log.e("SELL_OFFER_LIST::", "UI List size: ${dataState.data}")
-                    Log.d(logMsg, "Event")
+                    Log.e(logMsg, dataState.data.toString())
                     binding.bookListRv.layoutManager = LinearLayoutManager(this)
                     binding.bookListRv.adapter = BookListAdapter(
                         dataState.data,
@@ -62,10 +58,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
-    fun <T> Activity.collectLatestFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
+    fun <T> collectLatestFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 flow.collectLatest(collect)

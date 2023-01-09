@@ -43,8 +43,7 @@ object NetworkModule {
             .writeTimeout(1, TimeUnit.MINUTES)
             .addInterceptor(interceptor)
             .build()
-        var baseUrl = "https://picsum.photos/v2/"
-//        var baseUrl = "https://api.coincap.io/v2/"
+        val baseUrl = "https://picsum.photos/v2/"
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -52,15 +51,13 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
     }
 
-
     @Singleton
     @Provides
-    fun provideAgriService(@AppRetrofit retrofit: Retrofit.Builder): WebService {
+    fun provideBookService(@AppRetrofit retrofit: Retrofit.Builder): WebService {
         return retrofit
             .build()
             .create(WebService::class.java)
     }
-
 
     @Singleton
     @Provides
@@ -72,19 +69,19 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideAgriRetrofitService(
-        agriWebServices: WebService
+    fun provideBookRetrofitService(
+        WebServices: WebService
     ): RetrofitHelper {
-        return RetrofitHelperImpl(agriWebServices)
+        return RetrofitHelperImpl(WebServices)
     }
 
     @Provides
     @Singleton
-    fun providesCoinDataSource(
+    fun providesBooksDataSource(
         retrofitService: RetrofitHelper,
-        coinListResponseMapper: BookListResponseMapper
+        booksListResponseMapper: BookListResponseMapper
     ): DataSource {
-        return DataSourceImpl(retrofitService, coinListResponseMapper)
+        return DataSourceImpl(retrofitService, booksListResponseMapper)
     }
 }
 
