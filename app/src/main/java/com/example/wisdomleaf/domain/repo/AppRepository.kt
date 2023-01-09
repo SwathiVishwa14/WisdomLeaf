@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class AppRepository constructor(
-    private val coinListDataSource: DataSource
+    private val bookListDataSource: DataSource
 ) {
-    suspend fun getCoinList(): Flow<DataState<List<BookListResponseItem>>> = flow {
-        coinListDataSource.getBookList().collect {
+    suspend fun getBookList(): Flow<DataState<List<BookListResponseItem>>> = flow {
+        bookListDataSource.getBookList().collect {
             when (it) {
                 is DataState.Success -> {
                     emit(DataState.Success(it.data))

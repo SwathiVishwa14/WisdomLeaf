@@ -28,7 +28,7 @@ class MainViewModel @Inject constructor
         get() = _booksList
 
     fun getBooksList() = viewModelScope.launch(Dispatchers.IO) {
-        repository.getCoinList()
+        repository.getBookList()
             .onEach {
                 _booksList.value = it
             }

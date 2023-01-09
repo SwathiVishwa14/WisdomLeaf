@@ -2,6 +2,7 @@ package com.example.wisdomleaf.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 isRefreshing = false
             }
         }
-
+        binding.progressBar.visibility = View.VISIBLE
         bookListViewModel.getBooksList()
         Log.d(logMsg, "Initial")
         subscribeObserver()
@@ -43,12 +44,18 @@ class MainActivity : AppCompatActivity() {
         bookListViewModel.booksListData.observe(this) { dataState ->
             when (dataState) {
                 is DataState.Error -> {
+                    binding.progressBar.visibility = View.GONE
                     Log.e("GetBook List::", "Error : ${dataState.e}")
                 }
                 is DataState.Loading -> {
-
+                   if (dataState.b) {
+                        binding.progressBar.visibility = View.VISIBLE
+                    } else {
+                        binding.progressBar.visibility = View.GONE
+                    }
                 }
                 is DataState.Success -> {
+                    binding.progressBar.visibility = View.GONE
                     Log.e(logMsg, dataState.data.toString())
                     binding.bookListRv.layoutManager = LinearLayoutManager(this)
                     binding.bookListRv.adapter = BookListAdapter(
